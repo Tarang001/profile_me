@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarang - Product & UX Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0078d4;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #0078d4;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a202c;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: #0078d4;
+            font-weight: 600;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0078d4;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .project-highlights li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #0078d4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #005a9e;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .skill-list {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #e2e8f0;
+        }
+
+        .contact-item a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container">
+            <div class="nav">
+                <div class="logo">Tarang</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Product & UX Designer</h1>
+                <p>Engineering student passionate about creating inclusive, data-driven user experiences</p>
+                <a href="#projects" class="cta-button">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">1st</span>
+                        <span class="stat-label">Rank in B.Tech CSE</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">40+</span>
+                        <span class="stat-label">User Research Sessions</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">30%</span>
+                        <span class="stat-label">Avg. UX Improvement</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p>Hi! I'm Tarang, a <span class="highlight">rank-1 Computer Science Engineering student</span> at Jawaharlal Nehru University with a passion for product design and user experience.</p>
+                    
+                    <p>My journey combines <span class="highlight">technical excellence with design thinking</span> - from conducting user research with 20+ students to implementing responsive interfaces that improve task completion by 30%. I believe great products are born at the intersection of user needs, business goals, and technical feasibility.</p>
+                    
+                    <p>As President of the Literary Society and organizer of major campus events, I've developed strong leadership and communication skills. My experience ranges from <span class="highlight">digitizing sensitive army documents</span> to building BNPL systems for students - always with a user-first approach.</p>
+                    
+                    <p>I'm excited about joining Microsoft as a Product Design Intern to contribute to products that impact millions of users worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Shakha Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Shakha</h3>
+                        <p class="project-subtitle">BNPL System for Students</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            A comprehensive Buy Now Pay Later solution designed specifically for students, addressing unique financing challenges through extensive user research and iterative design.
+                        </p>
+                        
+                        <ul class="project-highlights">
+                            <li>Conducted user research with 20+ students to identify key financing challenges</li>
+                            <li>Created detailed personas and mapped user journey stages</li>
+                            <li>Designed low-fi wireframes and interactive Figma prototypes</li>
+                            <li>Built responsive Bootstrap interface validated through 20+ usability sessions</li>
+                            <li>Achieved 30% improvement in task-completion time</li>
+                        </ul>
+                        
+                        <div class="project-tags">
+                            <span class="tag">User Research</span>
+                            <span class="tag">Figma</span>
+                            <span class="tag">Wireframing</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">Usability Testing</span>
+                            <span class="tag">Bootstrap</span>
+                        </div>
+                        
+                        <a href="https://github.com/Tarang001/Shakha" class="project-link" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Aarogyam Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Aarogyam</h3>
+                        <p class="project-subtitle">Smart Health Monitoring System</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            A comprehensive health monitoring platform with dual interfaces for gym owners and members, focusing on intuitive information architecture and seamless user flows.
+                        </p>
+                        
+                        <ul class="project-highlights">
+                            <li>Planned user flows and information architecture from scratch</li>
+                            <li>Produced detailed Figma mock-ups for dual dashboard experience</li>
+                            <li>Implemented validated designs using Flask and MySQL</li>
+                            <li>Integrated modular APIs achieving sub-250ms response times</li>
+                            <li>Reduced average navigation time by 25% through A/B testing</li>
+                        </ul>
+                        
+                        <div class="project-tags">
+                            <span class="tag">Information Architecture</span>
+                            <span class="tag">User Flows</span>
+                            <span class="tag">Figma</span>
+                            <span class="tag">A/B Testing</span>
+                            <span class="tag">Flask</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                        
+                        <a href="https://github.com/Tarang001/Aarogyam" class="project-link" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Tools</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Design Tools</h3>
+                    <ul class="skill-list">
+                        <li>Figma</li>
+                        <li>Adobe XD</li>
+                        <li>Miro</li>
+                        <li>Balsamiq</li>
+                        <li>InVision</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">🔍</div>
+                    <h3>UX Research</h3>
+                    <ul class="skill-list">
+                        <li>User Research</li>
+                        <li>Usability Testing</li>
+                        <li>A/B Testing</li>
+                        <li>User Journey Mapping</li>
+                        <li>Persona Creation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">⚡</div>
+                    <h3>Prototyping</h3>
+                    <ul class="skill-list">
+                        <li>Interactive Prototypes</li>
+                        <li>Wireframing</li>
+                        <li>Design Systems</li>
+                        <li>Information Architecture</li>
+                        <li>User Flow Design</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-icon">💻</div>
+                    <h3>Technical</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>Flask/Django</li>
+                        <li>MySQL</li>
+                        <li>Cloud Fundamentals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Let's Create Something Amazing Together</h2>
+            <p>Ready to bring user-centered design to Microsoft? Let's connect!</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:starang526@gmail.com">starang526@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <a href="https://linkedin.com/in/tarang" target="_blank">LinkedIn</a>
+                </div>
+                <div class="contact-item">
+                    <span>💻</span>
+                    <a href="https://github.com/Tarang001" target="_blank">GitHub</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+919918790288">+91-9918790288</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all project cards and skill categories
+        document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
